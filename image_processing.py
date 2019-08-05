@@ -11,6 +11,7 @@ def gamma_transform(gamma, img):
     Returns:
         img
     Raises:
+    # ToDo(PengWen): you need to normalize to [0, 1] and then do power operator, and scale it back [0, 255]
     """
     img = np.power(img, gamma)
     return img
@@ -53,7 +54,8 @@ def draw_hist(hist):
     plt.show()
 
 
-path = "./cat1.jpg"
+# ToDo(PengWen): 1) use imgGamma_0p5 is better than imgGamma_5, 2) show results from gamma correction using 2x2 subplots
+path = "./kitty1.jpg"
 img_1 = cv2.imread(path)
 dst = np.zeros(img_1.shape)
 print(img_1.shape)
@@ -66,7 +68,7 @@ imgGamma_2 = gamma_transform(2, imgNorm_1)
 imgLab = cv2.cvtColor(imgGamma_1, cv2.COLOR_BGR2LAB)
 show_img('imgLab', imgLab)
 
-
+# ToDo(PengWen): 1) add english comments 2) visualization of HOG
 img_bolt = cv2.imread('./bolt2.png', 0)
 x = 200 # 裁切區域的 x 與 y 座標（左上角）
 y = 100
