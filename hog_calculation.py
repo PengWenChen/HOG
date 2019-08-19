@@ -2,6 +2,7 @@
 import math
 import cv2
 import numpy as np
+# ToDo(PengWen): hog_calculation & image_preprocessing are loop-calling each other, please resolve the dependency
 import image_preprocessing
 
 class hog_descriptor:
@@ -110,7 +111,7 @@ if __name__ == '__main__':
     img_bolt = cv2.imread('./img/bolt2.png', 0)
     img_bolt = np.float32(img_bolt) / 255.0 # a way to normalize to 0~1
     img_bolt = image_preprocessing.gamma_transform(0.5, img_bolt)
-    
+
     img_bolt = img_bolt[100:300, 200:300]
     img_bolt = cv2.resize(img_bolt, (64, 128))
     cv2.imshow("img_bolt", img_bolt)

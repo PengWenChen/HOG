@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+# ToDo(PengWen): hog_calculation & image_preprocessing are loop-calling each other, please resolve the dependency
 from hog_calculation import hog_descriptor
 import bolt_hog
 
@@ -63,9 +64,9 @@ if __name__ == '__main__':
     hist_cat = hog2.compute(normback_cat_1)
 
     hist_cat = np.reshape(hist_cat, (int(hist_cat.shape[0]/36), 36)) # reshape hist_cat with four histograms(=block size)
-    new_hist = bolt_hog.cal_histogram_2(hist_cat, nbins) # reorganize the final histograms (4 cells per new histogram)
+    new_hist = bolt_hog.cal_histogram_2(hist_cat, nbins)  # reorganize the final histograms (4 cells per new histogram)
                                                          # using cal_histogram_2 func from bolt_hog.py
-    h_obj = hog_descriptor(normback_cat_1, 8, 16, 8, 9) # create a hog_descriptor obj
+    h_obj = hog_descriptor(normback_cat_1, 8, 16, 8, 9)  # create a hog_descriptor obj
     cat_1 = hog_descriptor.draw_gradient(h_obj, new_hist, normback_cat_1) # use the draw_gradient method of the obj
     cv2.imwrite('./img/gradient_output/cat1_cv2.jpg', cat_1) # save the output
     # cat_1 = cv2.resize(cat_1, (int(cat_1.shape[1]*3), int(cat_1.shape[0]*3))) #zoom in
